@@ -10,7 +10,7 @@ Para poder ejecutar esta libreria es necesario tener una version de PHP 7+, Ya q
 
 
 ## Documentacion 📃
-La documentacion de esta libreria se encuentra en PDF con el nombre de ( Doc_jdoxx.pdf ) alli podra aprender a utilizarlo.
+La documentacion de esta libreria se encuentra en PDF con el nombre de ( Documentacion_JDX.pdf ) alli podra aprender a utilizarlo.
 
 
 
