@@ -1,17 +1,21 @@
+[![Latest Stable Version](https://poser.pugx.org/cboden/ratchet/v/stable.png)](https://packagist.org/packages/cboden/ratchet)
 
-# Library-J-Doxx
+# Library-J-Doxx 🚀
 Libreria de utilidad para programar en PHP aprovechando la variedades de funciones.
 
 
-## Requerimientos
+
+## Requerimientos 📋
 Para poder ejecutar esta libreria es necesario tener una version de PHP 7+, Ya que asi se evita la propagacion de errores.
 
-## Documentacion
+
+## Documentacion 
 La documentacion de esta libreria se encuentra en PDF con el nombre de ( Doc_jdoxx.pdf ) alli podra aprender a utilizarlo.
 
 
 
-## Instalacion de Libreria :
+## Instalacion de Libreria 🔧
+
 ```php
 
 <?php
@@ -25,9 +29,24 @@ echo fecha(2); // Debe dar la Fecha.
 
 
 
-[GA Image]: https://j-doxx.000webhostapp.com/assets/imagenes/logo/logo.webp
+## Errores & Fallos ⚠
+***
+Esta herramienta se encuentra en la version beta por lo que posiblemente pueda presentar errores en el funcionamiento como :
+1. **Hay funciones que NO funciona**
+2. **Los parametros introducidos son correctos pero me sale (Faltan parametros)**
+3. **La actualizacion via manual NO funciona**
 
-[![Latest Stable Version](https://j-doxx.000webhostapp.com/assets/imagenes/logo/logo.webp)](https://packagist.org/packages/cboden/ratchet)
 
 
+
+## Desarrolladores & Colaboradores ✒️
+
+_Agradecemos enriquezidamente a las siguientes personas que formaron parte de este proyecto, ¡ muchos Exitos !_
+
+* **Jose De la Hoz** - *Fundador* - [Jose De la Hoz](https://github.com/josedoxx)
+
+
+
+---
+⌨️ Copyright 2022 ❤️ ~ [Company - J|Doxx](https://github.com/josedoxx)
 
