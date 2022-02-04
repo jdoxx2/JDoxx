@@ -6,7 +6,6 @@ ini_set('date.timezone','America/Bogota');
 #========================================================================
 #LIBRERIA JDX VERSION 1.0
 #ESTE CODIGO HA SIDO CREADO POR JOSEDELAHOZ
-#DOC : https://j-doxx.000webhostapp.com/documentacion/Documentacion_JDX_1.0.pdf
 #Y SE LE PROHIBE LA MANIPULACION DE ESTE CODIGO
 #COPYRIGHT - 2021
 #========================================================================
