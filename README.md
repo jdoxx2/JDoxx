@@ -5,7 +5,7 @@ Libreria de utilidad para programar en PHP aprovechando la variedades de funcion
 
 
 
-## Requerimientos 📋
+## Requerimientos 🛠
 Para poder ejecutar esta libreria es necesario tener una version de PHP 7+, Ya que asi se evita la propagacion de errores.
 
 
