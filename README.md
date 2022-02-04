@@ -9,7 +9,7 @@ Libreria de utilidad para programar en PHP aprovechando la variedades de funcion
 Para poder ejecutar esta libreria es necesario tener una version de PHP 7+, Ya que asi se evita la propagacion de errores.
 
 
-## Documentacion 
+## Documentacion 📃
 La documentacion de esta libreria se encuentra en PDF con el nombre de ( Doc_jdoxx.pdf ) alli podra aprender a utilizarlo.
 
 
