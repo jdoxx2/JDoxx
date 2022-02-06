@@ -1,4 +1,3 @@
-[![Latest Stable Version](https://poser.pugx.org/cboden/ratchet/v/stable.png)](https://packagist.org/packages/cboden/ratchet)
 
 # Library-J-Doxx 🚀
 Libreria de utilidad para programar en PHP aprovechando la variedades de funciones.
