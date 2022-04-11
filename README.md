@@ -1,5 +1,5 @@
 
-# Utilidad J-Doxx 🚀
+# Utilidad JDX-PHP 🚀
 Libreria de utilidad para programar en PHP aprovechando la variedades de funciones.
 
 
